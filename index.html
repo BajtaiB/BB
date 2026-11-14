@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blancas Beads | Természetes Ásvány & NFC Ékszerek</title>
+    <!-- Elegáns, letisztult Google betűtípusok -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ALAP BEÁLLÍTÁSOK ÉS SZÍNPALETTA
+           ========================================= */
+        :root {
+            --bg-primary: #FAF8F5;      /* Meleg törtfehér / homok árnyalat */
+            --bg-secondary: #F2EDE4;    /* Lágy bézs kártyaháttér */
+            --text-dark: #2C2A29;       /* Mély antracit szöveg */
+            --text-muted: #75706B;      /* Visszafogott szürkésbarna */
+            --accent-gold: #B89F7D;     /* Finom pezsgőarany kiemelés */
+            --white: #FFFFFF;
+            --border-light: rgba(44, 42, 41, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           1. FELSŐ ÁLLANDÓ SÁV (HEADER) & BB LOGÓ
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 74px;
+            background: rgba(250, 248, 245, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+        }
+
+        /* Hamburger menü gomb (bal oldalon) */
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .menu-btn:hover span {
+            background-color: var(--accent-gold);
+        }
+
+        /* Középső BB monogram logó */
+        .brand-logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-decoration: none;
+            color: var(--text-dark);
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -2px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .brand-logo span {
+            display: inline-block;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-left: -3px;
+        }
+
+        .brand-logo:hover {
+            opacity: 0.8;
+        }
+
+        /* Jobb oldali finom NFC jelzés */
+        .header-tag {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .header-tag {
+                display: none;
+            }
+        }
+
+        /* =========================================
+           BAL OLDALRÓL KINYÍLÓ OLDALSÓ MENÜ
+           ========================================= */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 42, 41, 0.35);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -340px;
+            width: 320px;
+            max-width: 85vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            padding: 95px 35px 40px;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.06);
+            transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-menu.active {
+            left: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--text-dark);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 18px;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-nav a:hover {
+            color: var(--accent-gold);
+            padding-left: 6px;
+        }
+
+        .sidebar-footer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-light);
+            padding-top: 20px;
+        }
+
+        /* =========================================
+           2. HERO SZEKCIÓ (TENGERPARTI TÁJKÉP + FELIRAT)
+           ========================================= */
+        .hero {
+            margin-top: 74px;
+            position: relative;
+            width: 100%;
+            height: 78vh;
+            min-height: 480px;
+            max-height: 760px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Háttérkép - Ha saját tájképet szeretnél, az url('...') részben cseréld le! */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(
+                to bottom,
+                rgba(28, 26, 24, 0.22),
+                rgba(28, 26, 24, 0.42)
+            ),
+            url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.02);
+            transition: transform 8s ease-out;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.06);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            padding: 0 20px;
+            max-width: 720px;
+        }
+
+        .hero-subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            opacity: 0.92;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5.2rem);
+            font-weight: 400;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            opacity: 0.95;
+            max-width: 520px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-scroll-btn {
+            display: inline-block;
+            padding: 13px 34px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.78rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-scroll-btn:hover {
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        /* =========================================
+           ÁLTALÁNOS SZEKCIÓ FORMÁZÁS
+           ========================================= */
+        section {
+            padding: 85px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+        }
+
+        .section-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+
+        .section-lead {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           3. INTERAKTÍV KARKÖTŐ TERVEZŐ (KÉTOLDALI NYILAKKAL)
+           ========================================= */
+        .customizer-section {
+            background-color: var(--white);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .customizer-workspace {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            align-items: center;
+            gap: 24px;
+            background: var(--bg-primary);
+            padding: 45px 35px;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* Bal és jobb vezérlő oszlopok */
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .control-label {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .control-stone-name {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            min-height: 36px;
+        }
+
+        .control-stone-tag {
+            font-size: 0.78rem;
+            color: var(--accent-gold);
+            margin-bottom: 18px;
+        }
+
+        .arrow-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .arrow-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-light);
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .arrow-btn:hover {
+            background: var(--text-dark);
+            color: var(--white);
+            border-color: var(--text-dark);
+            transform: scale(1.06);
+        }
+
+        /* Középső karkötő megjelenítő vászon */
+        .bracelet-stage {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bracelet-ring {
+            position: relative;
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            /* Finom szál/szíj a gyöngyök alatt */
+            border: 2px solid rgba(184, 159, 125, 0.35);
+            transition: var(--transition);
+        }
+
+        /* Szíj karkötő módnál vastagabb fonott szál */
+        .bracelet-ring.strap-mode {
+            border: 9px solid #C8B69E;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.12);
+        }
+
+        /* Egyes ásványgyöngyök stílusa (3D gömb hatás) */
+        .bead {
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 
+                inset -4px -5px 9px rgba(0, 0, 0, 0.38),
+                inset 3px 3px 7px rgba(255, 255, 255, 0.55),
+                0 4px 8px rgba(0, 0, 0, 0.14);
+            transition: background 0.4s ease, transform 0.3s ease;
+        }
+
+        /* Az alsó-középső kiemelt (állandó / NFC) gyöngy */
+        .bead.center-bead {
+            width: 38px;
+            height: 38px;
+            z-index: 5;
+            box-shadow: 
+                inset -5px -6px 11px rgba(0, 0, 0, 0.42),
+                inset 4px 4px 8px rgba(255, 255, 255, 0.65),
+                0 6px 14px rgba(0, 0, 0, 0.22);
+        }
+
+        /* Távtartó fém gyűrűk a középső gyöngy mellett */
+        .spacer-ring {
+            position: absolute;
+            width: 14px;
+            height: 28px;
+            background: linear-gradient(135deg, #F3E5AB, #B89F7D, #8C7352);
+            border-radius: 4px;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .bracelet-ring.spacer-mode .spacer-ring {
+            display: block;
+        }
+
+        .bracelet-center-info {
+            position: absolute;
+            text-align: center;
+            max-width: 155px;
+            pointer-events: none;
+        }
+
+        .bracelet-center-info span {
+            display: block;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .bracelet-center-info strong {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Stílusválasztó gombok a tervező alatt (Full gyöngy / Szíjas / Távtartós) */
+        .style-switcher {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .style-pill {
+            padding: 9px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border-light);
+            background: var(--white);
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .style-pill.active,
+        .style-pill:hover {
+            background: var(--text-dark);
+            color: var(--white);
+            border-color: var(--text-dark);
+        }
+
+        @media (max-width: 900px) {
+            .customizer-workspace {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+            .bracelet-stage {
+                order: -1;
+                width: 290px;
+                height: 290px;
+            }
+            .bracelet-ring {
+                width: 245px;
+                height: 245px;
+            }
+        }
+
+        /* =========================================
+           4. VÍZSZINTESEN GÖRGETHETŐ GALÉRIÁK
+           (EGYSZÍNŰ KARKÖTŐK ÉS SAJÁT MODELLEK)
+           ========================================= */
+        .carousel-wrapper {
+            position: relative;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .scroll-track {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 4px 24px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-gold) var(--bg-secondary);
+        }
+
+        .scroll-track::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .scroll-track::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .scroll-track::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 10px;
+        }
+
+        /* Termékkártya (Egyszínű karkötők) */
+        .product-card {
+            flex: 0 0 275px;
+            background: var(--white);
+            border-radius: 14px;
+            padding: 26px 22px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px rgba(44, 42, 41, 0.06);
+        }
+
+        .mini-bracelet-preview {
+            width: 140px;
+            height: 140px;
+            margin: 10px auto 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .card-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .card-badge {
+            margin-top: auto;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            padding-top: 10px;
+            border-top: 1px solid var(--border-light);
+            width: 100%;
+        }
+
+        /* =========================================
+           5. SAJÁT FOTÓK HELYE (TOVÁBBI MODELLEK)
+           ========================================= */
+        .models-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .photo-card {
+            flex: 0 0 300px;
+            background: var(--white);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .photo-slot {
+            width: 100%;
+            height: 310px;
+            background: linear-gradient(145deg, #EAE3D7, #F7F4EE);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .placeholder-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px dashed var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .placeholder-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            max-width: 210px;
+        }
+
+        .photo-card-body {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .photo-card-body h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .photo-card-body p {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           PLUSZ ÖTLET: DISZKRÉT NFC ÉLMÉNY SÁV & LÁBLÉC
+           ========================================= */
+        .nfc-info-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .nfc-feature {
+            padding: 20px;
+        }
+
+        .nfc-feature h4 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .nfc-feature p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.75);
+            text-align: center;
+            padding: 50px 5% 35px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 2.1rem;
+            color: var(--white);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            max-width: 460px;
+            margin: 0 auto 20px;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =================================================================
+         1. FELSŐ ÁLLANDÓ SÁV (BB LOGÓVAL ÉS BAL OLDALI HAMBURGER MENÜVEL)
+         ================================================================= -->
+    <header>
+        <button class="menu-btn" id="openMenuBtn" aria-label="Menü megnyitása">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a href="#" class="brand-logo" title="Blancas Beads Kezdőlap">
+            B<span>B</span>
+        </a>
+
+        <div class="header-tag">Natural Stone & NFC</div>
+    </header>
+
+    <!-- Bal oldalról kinyíló oldalsó menü -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar-menu" id="sidebarMenu">
+        <div>
+            <button class="close-btn" id="closeMenuBtn" aria-label="Menü bezárása">&times;</button>
+            <div class="sidebar-title">Blancas Beads</div>
+            <ul class="sidebar-nav">
+                <li><a href="#tervezo" class="menu-link">Egyedi Karkötő Tervező <span>&rarr;</span></a></li>
+                <li><a href="#egyszinu-kollekcio" class="menu-link">NFC Gyöngyök <span>&rarr;</span></a></li>
+                <li><a href="#egyszinu-kollekcio" class="menu-link">Ásványgyöngyök <span>&rarr;</span></a></li>
+                <li><a href="#egyszinu-kollekcio" class="menu-link">NFC Karkötők <span>&rarr;</span></a></li>
+                <li><a href="#tovabbi-modellek" class="menu-link">NFC Nyakláncok <span>&rarr;</span></a></li>
+                <li><a href="#tovabbi-modellek" class="menu-link">Szíjas & Díszített ModelLek <span>&rarr;</span></a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            Valódi ásványokból kézzel fűzött, rejtett NFC technológiával ellátott egyedi ékszerek.
+        </div>
+    </aside>
+
+    <!-- =================================================================
+         2. HERO SZEKCIÓ (TENGERPARTI TÁJKÉP + BLANCAS BEADS)
+         ================================================================= -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Valódi ásványok &bull; Intelligens érintés</div>
+            <h1 class="hero-title">Blancas Beads</h1>
+            <p class="hero-desc">
+                Természetes kövek időtlen szépsége, egyetlen érintésbe zárt személyes üzenettel.
+            </p>
+            <a href="#tervezo" class="hero-scroll-btn">Saját karkötő összeállítása</a>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         3. INTERAKTÍV KARKÖTŐ ÖSSZEÁLLÍTÓ (BAL NYÍL: ALSÓ GYÖNGY, JOBB NYÍL: TÖBBI GYÖNGY)
+         ================================================================= -->
+    <section class="customizer-section" id="tervezo">
+        <div class="section-header">
+            <span class="section-eyebrow">Interaktív Műhely</span>
+            <h2 class="section-title">Állítsd össze saját karkötődet</h2>
+            <p class="section-lead">
+                Válaszd ki az alsó, kiemelt NFC gyöngy színét a bal oldali nyilakkal, a karkötőt alkotó többi ásványgyöngy árnyalatát pedig a jobb oldali nyilakkal.
+            </p>
+        </div>
+
+        <div class="customizer-workspace">
+            <!-- BAL OLDALI VEZÉRLŐ: ALSÓ / KÖZÉPSŐ GYÖNGY SZÍNE -->
+            <div class="control-panel">
+                <span class="control-label">Kiemelt NFC Főgyöngy</span>
+                <div class="control-stone-name" id="centerStoneName">Aventurin Zöld</div>
+                <div class="control-stone-tag" id="centerStoneTrait">Bőség &bull; Harmónia</div>
+                <div class="arrow-group">
+                    <button class="arrow-btn" id="prevCenterBtn" title="Előző főgyöngy">&#8592;</button>
+                    <button class="arrow-btn" id="nextCenterBtn" title="Következő főgyöngy">&#8594;</button>
+                </div>
+            </div>
+
+            <!-- KÖZÉPSŐ VIZUÁLIS KARKÖTŐ -->
+            <div class="bracelet-stage">
+                <div class="bracelet-ring" id="braceletRing">
+                    <!-- A gyöngyöket a JavaScript helyezi el pontos körívben -->
+                </div>
+                <div class="bracelet-center-info">
+                    <span>Blancas Beads</span>
+                    <strong id="braceletStyleLabel">Full Gyöngy</strong>
+                </div>
+            </div>
+
+            <!-- JOBB OLDALI VEZÉRLŐ: ÖSSZES TÖBBI GYÖNGY SZÍNE -->
+            <div class="control-panel">
+                <span class="control-label">Kísérő Ásványgyöngyök</span>
+                <div class="control-stone-name" id="outerStoneName">Fehér Howlit</div>
+                <div class="control-stone-tag" id="outerStoneTrait">Nyugalom &bull; Tisztaság</div>
+                <div class="arrow-group">
+                    <button class="arrow-btn" id="prevOuterBtn" title="Előző kísérő szín">&#8592;</button>
+                    <button class="arrow-btn" id="nextOuterBtn" title="Következő kísérő szín">&#8594;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Karkötő típus választó (Full gyöngy / Szíj karkötő / Távtartó díszes) -->
+        <div class="style-switcher">
+            <button class="style-pill active" data-style="full">Full gyöngy karkötő</button>
+            <button class="style-pill" data-style="spacer">Távtartó díszítővel</button>
+            <button class="style-pill" data-style="strap">Fonott szíj karkötő</button>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         4. EGYSZÍNŰ KARKÖTŐK (BALRA ÉS JOBBRA GÖRGETHETŐ KOLLEKCIÓ)
+         ================================================================= -->
+    <section id="egyszinu-kollekcio">
+        <div class="section-header">
+            <span class="section-eyebrow">Letisztult Klasszikusok</span>
+            <h2 class="section-title">Egyszínű ásvány karkötők</h2>
+            <p class="section-lead">
+                Görgess oldalra a természetes kövekből készült, egységes színvilágú NFC karkötőink között.
+            </p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-controls">
+                <button class="arrow-btn" onclick="scrollTrack('solidTrack', -300)" aria-label="Balra görgetés">&#8592;</button>
+                <button class="arrow-btn" onclick="scrollTrack('solidTrack', 300)" aria-label="Jobbra görgetés">&#8594;</button>
+            </div>
+
+            <div class="scroll-track" id="solidTrack">
+                <!-- Az egyszínű karkötők kártyáit a JavaScript tölti be -->
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         5. TOVÁBBI MODELLEK – SAJÁT FOTÓK HELYE (GÖRGETHETŐ GALÉRIA)
+         ================================================================= -->
+    <section class="models-section" id="tovabbi-modellek">
+        <div class="section-header">
+            <span class="section-eyebrow">Galéria & Inspiráció</span>
+            <h2 class="section-title">További modellek & Különlegességek</h2>
+            <p class="section-lead">
+                Szíjas karkötők, távtartóval díszített darabok és egyedi NFC nyakláncok.
+            </p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-controls">
+                <button class="arrow-btn" onclick="scrollTrack('modelsTrack', -320)" aria-label="Balra görgetés">&#8592;</button>
+                <button class="arrow-btn" onclick="scrollTrack('modelsTrack', 320)" aria-label="Jobbra görgetés">&#8594;</button>
+            </div>
+
+            <div class="scroll-track" id="modelsTrack">
+                
+                <!-- ===============================================================
+                     1. SAJÁT KÉP HELYE:
+                     Ha feltöltöttél egy képet a GitHubra (pl. modell1.jpg), töröld ki
+                     a <div class="placeholder-icon">...</div> és <div class="placeholder-text">...</div>
+                     részeket, és vedd ki a kommentjelet az <img> sor elől/mögül!
+                     =============================================================== -->
+                <div class="photo-card">
+                    <div class="photo-slot">
+                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell1.jpg" alt="Szíj karkötő ásvánnyal"> -->
+                        <div class="placeholder-icon">+</div>
+                        <div class="placeholder-text"><strong>1. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell1.jpg</code></div>
+                    </div>
+                    <div class="photo-card-body">
+                        <h3>Fonott Szíj & NFC Gyöngy</h3>
+                        <p>Minimalista zsinóros kivitel egyetlen központi természetes kővel.</p>
+                    </div>
+                </div>
+
+                <!-- ===============================================================
+                     2. SAJÁT KÉP HELYE (modell2.jpg)
+                     =============================================================== -->
+                <div class="photo-card">
+                    <div class="photo-slot">
+                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell2.jpg" alt="Távtartó díszes karkötő"> -->
+                        <div class="placeholder-icon">+</div>
+                        <div class="placeholder-text"><strong>2. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell2.jpg</code></div>
+                    </div>
+                    <div class="photo-card-body">
+                        <h3>Távtartó Díszes Kiadás</h3>
+                        <p>Nemesfém hatású köztes elemekkel kiemelt ásványgyöngyök.</p>
+                    </div>
+                </div>
+
+                <!-- ===============================================================
+                     3. SAJÁT KÉP HELYE (modell3.jpg)
+                     =============================================================== -->
+                <div class="photo-card">
+                    <div class="photo-slot">
+                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell3.jpg" alt="NFC Nyaklánc"> -->
+                        <div class="placeholder-icon">+</div>
+                        <div class="placeholder-text"><strong>3. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell3.jpg</code></div>
+                    </div>
+                    <div class="photo-card-body">
+                        <h3>Blancas NFC Nyaklánc</h3>
+                        <p>Finom láncon függő természetes kő, rejtett digitális emlékkel.</p>
+                    </div>
+                </div>
+
+                <!-- ===============================================================
+                     4. SAJÁT KÉP HELYE (modell4.jpg)
+                     =============================================================== -->
+                <div class="photo-card">
+                    <div class="photo-slot">
+                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell4.jpg" alt="Páros ásvány karkötő"> -->
+                        <div class="placeholder-icon">+</div>
+                        <div class="placeholder-text"><strong>4. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell4.jpg</code></div>
+                    </div>
+                    <div class="photo-card-body">
+                        <h3>Páros Harmónia Szett</h3>
+                        <p>Egymást kiegészítő ásványpárok közös üzenettel összekötve.</p>
+                    </div>
+                </div>
+
+                <!-- ===============================================================
+                     5. SAJÁT KÉP HELYE (modell5.jpg)
+                     =============================================================== -->
+                <div class="photo-card">
+                    <div class="photo-slot">
+                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell5.jpg" alt="Egyedi kollekció"> -->
+                        <div class="placeholder-icon">+</div>
+                        <div class="placeholder-text"><strong>5. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell5.jpg</code></div>
+                    </div>
+                    <div class="photo-card-body">
+                        <h3>Limitált Tengerparti Széria</h3>
+                        <p>Lágy pasztell kövek és homokszínű részletek találkozása.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         PLUSZ KIEGÉSZÍTÉS: HOGYAN MŰKÖDIK AZ NFC GYÖNGY?
+         ================================================================= -->
+    <section>
+        <div class="nfc-info-strip">
+            <div class="nfc-feature">
+                <h4>100% Valódi Ásványok</h4>
+                <p>Minden egyes gyöngy gondosan válogatott, természetes ásványkőből készül, egyedi mintázattal.</p>
+            </div>
+            <div class="nfc-feature">
+                <h4>Rejtett NFC Technológia</h4>
+                <p>Érintsd a telefonodat a központi gyöngyhöz, és azonnal megnyílik a hozzá kapcsolt üzenet, fotó vagy zene.</p>
+            </div>
+            <div class="nfc-feature">
+                <h4>Töltés Nélkül Működik</h4>
+                <p>Az NFC chip nem igényel akkumulátort vagy töltést – vízálló és örök életű emlék marad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         LÁBLÉC (FOOTER)
+         ================================================================= -->
+    <footer>
+        <div class="footer-logo">B<span>B</span></div>
+        <p>Blancas Beads — Természetes ásványokból született, modern érintésre hangolt ékszerek.</p>
+        <div class="copyright">&copy; 2026 Blancas Beads. Minden jog fenntartva.</div>
+    </footer>
+
+    <!-- =================================================================
+         JAVASCRIPT LOGIKA (MENÜ, INTERAKTÍV KARKÖTŐ ÉS GALÉRIA)
+         ================================================================= -->
+    <script>
+        /* -----------------------------------------
+           1. OLDALSÓ HAMBURGER MENÜ MŰKÖDÉSE
+           ----------------------------------------- */
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu(open) {
+            if (open) {
+                sidebarMenu.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            } else {
+                sidebarMenu.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            }
+        }
+
+        openMenuBtn.addEventListener('click', () => toggleMenu(true));
+        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+        sidebarOverlay.addEventListener('click', () => toggleMenu(false));
+        menuLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+        /* -----------------------------------------
+           2. ÁSVÁNYGYÖNGYÖK ADATBÁZISA (VALÓSÁGHŰ TEXTÚRÁKKAL)
+           ----------------------------------------- */
+        const stones = [
+            {
+                name: "Aventurin Zöld",
+                trait: "Bőség • Harmónia",
+                desc: "Nyugtató, lágy zöld ásvány, amely természetes frissességet sugároz.",
+                gradient: "radial-gradient(circle at 30% 30%, #8FC19A, #3E7B52 60%, #1F472C)"
+            },
+            {
+                name: "Fehér Howlit",
+                trait: "Nyugalom • Tisztaság",
+                desc: "Hófehér ásvány finom, természetes szürke márványerezettel.",
+                gradient: "radial-gradient(circle at 30% 30%, #FFFFFF, #EAE7E1 65%, #BEB9B0)"
+            },
+            {
+                name: "Fekete Ónix",
+                trait: "Erő • Védelem",
+                desc: "Mély, selyemfényű fekete kő az időtlen elegancia jegyében.",
+                gradient: "radial-gradient(circle at 30% 30%, #5A5A5A, #1C1C1C 60%, #050505)"
+            },
+            {
+                name: "Tigrisszem",
+                trait: "Bátorság • Fókusz",
+                desc: "Aranybarna és mély bronz sávokban játszó, selymes fényű kő.",
+                gradient: "radial-gradient(circle at 30% 30%, #E0A952, #8C4E19 60%, #3D1E06)"
+            },
+            {
+                name: "Kék-fehér Szodalit",
+                trait: "Inspiráció • Önkifejezés",
+                desc: "Mélytengeri kék ásvány jellegzetes fehér kalcit mintázattal.",
+                gradient: "radial-gradient(circle at 30% 30%, #8CB4E8, #27518A 55%, #12294A)"
+            },
+            {
+                name: "Rózsakvarc",
+                trait: "Szeretet • Gyengédség",
+                desc: "Áttetsző, púderes rózsaszín kristály lágy, meleg ragyogással.",
+                gradient: "radial-gradient(circle at 30% 30%, #FCE4EC, #E8A5B8 60%, #B86E84)"
+            },
+            {
+                name: "Ametiszt",
+                trait: "Belső béke • Intuíció",
+                desc: "Nemes, mélylila kvarckristály finom fénytöréssel.",
+                gradient: "radial-gradient(circle at 30% 30%, #D1B3FF, #7644B8 60%, #3E1D6B)"
+            }
+        ];
+
+        /* -----------------------------------------
+           3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA ÉS VEZÉRLÉSE
+           ----------------------------------------- */
+        let centerStoneIndex = 0; // Kezdés: Aventurin Zöld az alsó főgyöngy
+        let outerStoneIndex = 1;  // Kezdés: Fehér Howlit a többi gyöngy
+        let currentStyle = 'full'; // 'full', 'spacer', 'strap'
+
+        const braceletRing = document.getElementById('braceletRing');
+        const centerStoneName = document.getElementById('centerStoneName');
+        const centerStoneTrait = document.getElementById('centerStoneTrait');
+        const outerStoneName = document.getElementById('outerStoneName');
+        const outerStoneTrait = document.getElementById('outerStoneTrait');
+        const braceletStyleLabel = document.getElementById('braceletStyleLabel');
+
+        function renderInteractiveBracelet() {
+            braceletRing.innerHTML = '';
+            const totalBeads = 18; // Összes gyöngy száma a körben
+            const radius = braceletRing.offsetWidth / 2;
+            const centerX = radius;
+            const centerY = radius;
+
+            const centerStone = stones[centerStoneIndex];
+            const outerStone = stones[outerStoneIndex];
+
+            // Feliratok frissítése
+            centerStoneName.textContent = centerStone.name;
+            centerStoneTrait.textContent = centerStone.trait;
+            outerStoneName.textContent = outerStone.name;
+            outerStoneTrait.textContent = outerStone.trait;
+
+            // Stílus osztályok kezelése
+            braceletRing.classList.remove('strap-mode', 'spacer-mode');
+            if (currentStyle === 'strap') {
+                braceletRing.classList.add('strap-mode');
+                braceletStyleLabel.textContent = "Fonott Szíj";
+            } else if (currentStyle === 'spacer') {
+                braceletRing.classList.add('spacer-mode');
+                braceletStyleLabel.textContent = "Távtartó Díszes";
+            } else {
+                braceletStyleLabel.textContent = "Full Gyöngy";
+            }
+
+            for (let i = 0; i < totalBeads; i++) {
+                // Szög kiszámítása úgy, hogy az i = 0 pontosan ALUL KÖZÉPEN (90 fok / PI/2) legyen
+                const angle = (Math.PI / 2) + (i * (2 * Math.PI / totalBeads));
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                // Szíj karkötő módban csak az alsó főgyöngy és a két melletti gyöngy látszik
+                if (currentStyle === 'strap' && i !== 0 && i !== 1 && i !== totalBeads - 1) {
+                    continue;
+                }
+
+                const bead = document.createElement('div');
+                bead.classList.add('bead');
+
+                if (i === 0) {
+                    // Alsó középső kiemelt NFC gyöngy
+                    bead.classList.add('center-bead');
+                    bead.style.background = centerStone.gradient;
+                } else {
+                    // Többi gyöngy a karkötőben
+                    const size = window.innerWidth <= 900 ? 25 : 29;
+                    bead.style.width = `${size}px`;
+                    bead.style.height = `${size}px`;
+                    bead.style.background = outerStone.gradient;
+                }
+
+                bead.style.left = `${x}px`;
+                bead.style.top = `${y}px`;
+                braceletRing.appendChild(bead);
+
+                // Távtartó gyűrűk elhelyezése a főgyöngy két oldalán
+                if (i === 0) {
+                    [-0.19, 0.19].forEach(offsetAngle => {
+                        const spacer = document.createElement('div');
+                        spacer.classList.add('spacer-ring');
+                        const sx = centerX + radius * Math.cos(angle + offsetAngle);
+                        const sy = centerY + radius * Math.sin(angle + offsetAngle);
+                        spacer.style.left = `${sx}px`;
+                        spacer.style.top = `${sy}px`;
+                        spacer.style.transform = `translate(-50%, -50%) rotate(${angle + offsetAngle + Math.PI/2}rad)`;
+                        braceletRing.appendChild(spacer);
+                    });
+                }
+            }
+        }
+
+        // Bal oldali nyilak: Alsó / középső főgyöngy léptetése
+        document.getElementById('prevCenterBtn').addEventListener('click', () => {
+            centerStoneIndex = (centerStoneIndex - 1 + stones.length) % stones.length;
+            renderInteractiveBracelet();
+        });
+
+        document.getElementById('nextCenterBtn').addEventListener('click', () => {
+            centerStoneIndex = (centerStoneIndex + 1) % stones.length;
+            renderInteractiveBracelet();
+        });
+
+        // Jobb oldali nyilak: Többi gyöngy léptetése egyszerre
+        document.getElementById('prevOuterBtn').addEventListener('click', () => {
+            outerStoneIndex = (outerStoneIndex - 1 + stones.length) % stones.length;
+            renderInteractiveBracelet();
+        });
+
+        document.getElementById('nextOuterBtn').addEventListener('click', () => {
+            outerStoneIndex = (outerStoneIndex + 1) % stones.length;
+            renderInteractiveBracelet();
+        });
+
+        // Karkötő típus gombok (Full gyöngy / Távtartó / Szíj)
+        document.querySelectorAll('.style-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.style-pill').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentStyle = btn.dataset.style;
+                renderInteractiveBracelet();
+            });
+        });
+
+        /* -----------------------------------------
+           4. EGYSZÍNŰ KARKÖTŐK GALÉRIA GENERÁLÁSA
+           ----------------------------------------- */
+        function renderSolidBracelets() {
+            const solidTrack = document.getElementById('solidTrack');
+            solidTrack.innerHTML = '';
+
+            stones.forEach(stone => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                // Mini karkötő gyöngyeinek generálása
+                let miniBeadsHTML = '';
+                const count = 14;
+                const r = 52;
+                const cx = 70;
+                const cy = 70;
+
+                for (let i = 0; i < count; i++) {
+                    const a = (i * 2 * Math.PI) / count;
+                    const bx = cx + r * Math.cos(a);
+                    const by = cy + r * Math.sin(a);
+                    miniBeadsHTML += `
+                        <div style="
+                            position: absolute;
+                            left: ${bx}px;
+                            top: ${by}px;
+                            width: 19px;
+                            height: 19px;
+                            border-radius: 50%;
+                            transform: translate(-50%, -50%);
+                            background: ${stone.gradient};
+                            box-shadow: inset -2px -3px 5px rgba(0,0,0,0.35), inset 2px 2px 4px rgba(255,255,255,0.55), 0 2px 5px rgba(0,0,0,0.12);
+                        "></div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="mini-bracelet-preview">${miniBeadsHTML}</div>
+                    <h3 class="card-title">${stone.name}</h3>
+                    <p class="card-subtitle">${stone.desc}</p>
+                    <div class="card-badge">NFC &bull; ${stone.trait}</div>
+                `;
+
+                solidTrack.appendChild(card);
+            });
+        }
+
+        /* -----------------------------------------
+           5. VÍZSZINTES GALÉRIA NYILAK MŰKÖDÉSE
+           ----------------------------------------- */
+        function scrollTrack(trackId, distance) {
+            const track = document.getElementById(trackId);
+            track.scrollBy({
+                left: distance,
+                behavior: 'smooth'
+            });
+        }
+
+        // Oldal betöltésekor és átméretezésekor kirajzoljuk a karkötőket
+        window.addEventListener('DOMContentLoaded', () => {
+            renderInteractiveBracelet();
+            renderSolidBracelets();
+        });
+
+        window.addEventListener('resize', renderInteractiveBracelet);
+    </script>
+</body>
+</html>
