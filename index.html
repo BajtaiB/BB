@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blankas Beads | Természetes Ásvány & NFC Ékszerek</title>
+    <title>Blanka's Beads | Természetes Ásvány & NFC Ékszerek</title>
     <!-- Elegáns, letisztult Google betűtípusok -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
         }
 
         /* =========================================
-           1. FELSŐ ÁLLANDÓ SÁV (HEADER) & BB LOGÓ
+           1. FELSŐ ÁLLANDÓ SÁV (HEADER) & LETISZTULT BB LOGÓ
            ========================================= */
         header {
             position: fixed;
@@ -91,7 +91,7 @@
             background-color: var(--accent-gold);
         }
 
-        /* Középső BB monogram logó */
+        /* Középső letisztult, két nagy írott BB logó */
         .brand-logo {
             position: absolute;
             left: 50%;
@@ -99,23 +99,15 @@
             text-decoration: none;
             color: var(--text-dark);
             font-family: var(--font-serif);
-            font-size: 2rem;
+            font-style: italic;
+            font-size: 2.15rem;
             font-weight: 500;
-            letter-spacing: -2px;
-            display: flex;
-            align-items: center;
+            letter-spacing: 1px;
             transition: var(--transition);
         }
 
-        .brand-logo span {
-            display: inline-block;
-            font-style: italic;
-            color: var(--accent-gold);
-            margin-left: -3px;
-        }
-
         .brand-logo:hover {
-            opacity: 0.8;
+            opacity: 0.75;
         }
 
         /* Jobb oldali finom NFC jelzés */
@@ -186,7 +178,7 @@
 
         .sidebar-title {
             font-family: var(--font-serif);
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             color: var(--accent-gold);
             margin-bottom: 25px;
             border-bottom: 1px solid var(--border-light);
@@ -198,13 +190,13 @@
         }
 
         .sidebar-nav li {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
         .sidebar-nav a {
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             letter-spacing: 1.2px;
             text-transform: uppercase;
             transition: var(--transition);
@@ -251,7 +243,7 @@
                 rgba(28, 26, 24, 0.22),
                 rgba(28, 26, 24, 0.42)
             ),
-            url('https://i.pinimg.com/originals/0b/ff/07/0bff07df4d1e2643f49bcc7588dfdfcb.jpg');
+            url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85');
             background-size: cover;
             background-position: center;
             transform: scale(1.02);
@@ -451,18 +443,15 @@
             width: 270px;
             height: 270px;
             border-radius: 50%;
-            /* Finom szál/szíj a gyöngyök alatt */
             border: 2px solid rgba(184, 159, 125, 0.35);
             transition: var(--transition);
         }
 
-        /* Szíj karkötő módnál vastagabb fonott szál */
         .bracelet-ring.strap-mode {
             border: 9px solid #C8B69E;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.12);
         }
 
-        /* Egyes ásványgyöngyök stílusa (3D gömb hatás) */
         .bead {
             position: absolute;
             border-radius: 50%;
@@ -474,7 +463,6 @@
             transition: background 0.4s ease, transform 0.3s ease;
         }
 
-        /* Az alsó-középső kiemelt (állandó / NFC) gyöngy */
         .bead.center-bead {
             width: 38px;
             height: 38px;
@@ -485,7 +473,6 @@
                 0 6px 14px rgba(0, 0, 0, 0.22);
         }
 
-        /* Távtartó fém gyűrűk a középső gyöngy mellett */
         .spacer-ring {
             position: absolute;
             width: 14px;
@@ -524,7 +511,6 @@
             color: var(--text-dark);
         }
 
-        /* Stílusválasztó gombok a tervező alatt (Full gyöngy / Szíjas / Távtartós) */
         .style-switcher {
             display: flex;
             justify-content: center;
@@ -571,7 +557,6 @@
 
         /* =========================================
            4. VÍZSZINTESEN GÖRGETHETŐ GALÉRIÁK
-           (EGYSZÍNŰ KARKÖTŐK ÉS SAJÁT MODELLEK)
            ========================================= */
         .carousel-wrapper {
             position: relative;
@@ -610,7 +595,6 @@
             border-radius: 10px;
         }
 
-        /* Termékkártya (Egyszínű karkötők) */
         .product-card {
             flex: 0 0 275px;
             background: var(--white);
@@ -742,7 +726,81 @@
         }
 
         /* =========================================
-           PLUSZ ÖTLET: DISZKRÉT NFC ÉLMÉNY SÁV & LÁBLÉC
+           6. ÚJ SZEKCIÓ: FUNKCIÓK (DIGITÁLIS NÉVJEGYKÁRTYA ÉS EGYEBEK)
+           ========================================= */
+        .functions-section {
+            background-color: var(--white);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .functions-grid {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .function-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 34px 30px;
+            transition: var(--transition);
+        }
+
+        .function-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 26px rgba(44, 42, 41, 0.05);
+        }
+
+        .function-number {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .function-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .function-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .function-list {
+            list-style: none;
+            border-top: 1px solid var(--border-light);
+            padding-top: 16px;
+        }
+
+        .function-list li {
+            font-size: 0.86rem;
+            color: var(--text-dark);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .function-list li::before {
+            content: "•";
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* =========================================
+           DISZKRÉT NFC ÉLMÉNY SÁV & LÁBLÉC
            ========================================= */
         .nfc-info-strip {
             display: grid;
@@ -778,15 +836,12 @@
 
         .footer-logo {
             font-family: var(--font-serif);
-            font-size: 2.1rem;
+            font-style: italic;
+            font-size: 2.2rem;
             color: var(--white);
             margin-bottom: 10px;
             display: inline-block;
-        }
-
-        .footer-logo span {
-            color: var(--accent-gold);
-            font-style: italic;
+            letter-spacing: 1px;
         }
 
         footer p {
@@ -807,7 +862,7 @@
 <body>
 
     <!-- =================================================================
-         1. FELSŐ ÁLLANDÓ SÁV (BB LOGÓVAL ÉS BAL OLDALI HAMBURGER MENÜVEL)
+         1. FELSŐ ÁLLANDÓ SÁV (LETISZTULT BB LOGÓVAL ÉS HAMBURGER MENÜVEL)
          ================================================================= -->
     <header>
         <button class="menu-btn" id="openMenuBtn" aria-label="Menü megnyitása">
@@ -816,9 +871,7 @@
             <span></span>
         </button>
 
-        <a href="#" class="brand-logo" title="Blancas Beads Kezdőlap">
-            B<span>B</span>
-        </a>
+        <a href="#" class="brand-logo" title="Blanka's Beads Kezdőlap">BB</a>
 
         <div class="header-tag">Natural Stone & NFC</div>
     </header>
@@ -828,14 +881,15 @@
     <aside class="sidebar-menu" id="sidebarMenu">
         <div>
             <button class="close-btn" id="closeMenuBtn" aria-label="Menü bezárása">&times;</button>
-            <div class="sidebar-title">Blancas Beads</div>
+            <div class="sidebar-title">Blanka's Beads</div>
             <ul class="sidebar-nav">
                 <li><a href="#tervezo" class="menu-link">Egyedi Karkötő Tervező <span>&rarr;</span></a></li>
                 <li><a href="#egyszinu-kollekcio" class="menu-link">NFC Gyöngyök <span>&rarr;</span></a></li>
                 <li><a href="#egyszinu-kollekcio" class="menu-link">Ásványgyöngyök <span>&rarr;</span></a></li>
                 <li><a href="#egyszinu-kollekcio" class="menu-link">NFC Karkötők <span>&rarr;</span></a></li>
                 <li><a href="#tovabbi-modellek" class="menu-link">NFC Nyakláncok <span>&rarr;</span></a></li>
-                <li><a href="#tovabbi-modellek" class="menu-link">Szíjas & Díszített ModelLek <span>&rarr;</span></a></li>
+                <li><a href="#tovabbi-modellek" class="menu-link">Szíjas & Díszített Modellek <span>&rarr;</span></a></li>
+                <li><a href="#funkciok" class="menu-link">Funkciók <span>&rarr;</span></a></li>
             </ul>
         </div>
         <div class="sidebar-footer">
@@ -844,13 +898,13 @@
     </aside>
 
     <!-- =================================================================
-         2. HERO SZEKCIÓ (TENGERPARTI TÁJKÉP + BLANCAS BEADS)
+         2. HERO SZEKCIÓ (TENGERPARTI TÁJKÉP + BLANKA'S BEADS)
          ================================================================= -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
             <div class="hero-subtitle">Valódi ásványok &bull; Intelligens érintés</div>
-            <h1 class="hero-title">Blancas Beads</h1>
+            <h1 class="hero-title">Blanka's Beads</h1>
             <p class="hero-desc">
                 Természetes kövek időtlen szépsége, egyetlen érintésbe zárt személyes üzenettel.
             </p>
@@ -859,7 +913,7 @@
     </section>
 
     <!-- =================================================================
-         3. INTERAKTÍV KARKÖTŐ ÖSSZEÁLLÍTÓ (BAL NYÍL: ALSÓ GYÖNGY, JOBB NYÍL: TÖBBI GYÖNGY)
+         3. INTERAKTÍV KARKÖTŐ ÖSSZEÁLLÍTÓ
          ================================================================= -->
     <section class="customizer-section" id="tervezo">
         <div class="section-header">
@@ -884,11 +938,9 @@
 
             <!-- KÖZÉPSŐ VIZUÁLIS KARKÖTŐ -->
             <div class="bracelet-stage">
-                <div class="bracelet-ring" id="braceletRing">
-                    <!-- A gyöngyöket a JavaScript helyezi el pontos körívben -->
-                </div>
+                <div class="bracelet-ring" id="braceletRing"></div>
                 <div class="bracelet-center-info">
-                    <span>Blancas Beads</span>
+                    <span>Blanka's Beads</span>
                     <strong id="braceletStyleLabel">Full Gyöngy</strong>
                 </div>
             </div>
@@ -905,7 +957,7 @@
             </div>
         </div>
 
-        <!-- Karkötő típus választó (Full gyöngy / Szíj karkötő / Távtartó díszes) -->
+        <!-- Karkötő típus választó -->
         <div class="style-switcher">
             <button class="style-pill active" data-style="full">Full gyöngy karkötő</button>
             <button class="style-pill" data-style="spacer">Távtartó díszítővel</button>
@@ -914,7 +966,7 @@
     </section>
 
     <!-- =================================================================
-         4. EGYSZÍNŰ KARKÖTŐK (BALRA ÉS JOBBRA GÖRGETHETŐ KOLLEKCIÓ)
+         4. EGYSZÍNŰ KARKÖTŐK (GÖRGETHETŐ KOLLEKCIÓ)
          ================================================================= -->
     <section id="egyszinu-kollekcio">
         <div class="section-header">
@@ -931,14 +983,12 @@
                 <button class="arrow-btn" onclick="scrollTrack('solidTrack', 300)" aria-label="Jobbra görgetés">&#8594;</button>
             </div>
 
-            <div class="scroll-track" id="solidTrack">
-                <!-- Az egyszínű karkötők kártyáit a JavaScript tölti be -->
-            </div>
+            <div class="scroll-track" id="solidTrack"></div>
         </div>
     </section>
 
     <!-- =================================================================
-         5. TOVÁBBI MODELLEK – SAJÁT FOTÓK HELYE (GÖRGETHETŐ GALÉRIA)
+         5. TOVÁBBI MODELLEK – SAJÁT FOTÓK HELYE
          ================================================================= -->
     <section class="models-section" id="tovabbi-modellek">
         <div class="section-header">
@@ -956,13 +1006,7 @@
             </div>
 
             <div class="scroll-track" id="modelsTrack">
-                
-                <!-- ===============================================================
-                     1. SAJÁT KÉP HELYE:
-                     Ha feltöltöttél egy képet a GitHubra (pl. modell1.jpg), töröld ki
-                     a <div class="placeholder-icon">...</div> és <div class="placeholder-text">...</div>
-                     részeket, és vedd ki a kommentjelet az <img> sor elől/mögül!
-                     =============================================================== -->
+                <!-- 1. SAJÁT KÉP HELYE -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell1.jpg" alt="Szíj karkötő ásvánnyal"> -->
@@ -975,9 +1019,7 @@
                     </div>
                 </div>
 
-                <!-- ===============================================================
-                     2. SAJÁT KÉP HELYE (modell2.jpg)
-                     =============================================================== -->
+                <!-- 2. SAJÁT KÉP HELYE -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell2.jpg" alt="Távtartó díszes karkötő"> -->
@@ -990,9 +1032,7 @@
                     </div>
                 </div>
 
-                <!-- ===============================================================
-                     3. SAJÁT KÉP HELYE (modell3.jpg)
-                     =============================================================== -->
+                <!-- 3. SAJÁT KÉP HELYE -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell3.jpg" alt="NFC Nyaklánc"> -->
@@ -1000,14 +1040,12 @@
                         <div class="placeholder-text"><strong>3. Saját kép helye</strong><br>Cseréld le a kódban: <code>modell3.jpg</code></div>
                     </div>
                     <div class="photo-card-body">
-                        <h3>Blancas NFC Nyaklánc</h3>
+                        <h3>Blanka's NFC Nyaklánc</h3>
                         <p>Finom láncon függő természetes kő, rejtett digitális emlékkel.</p>
                     </div>
                 </div>
 
-                <!-- ===============================================================
-                     4. SAJÁT KÉP HELYE (modell4.jpg)
-                     =============================================================== -->
+                <!-- 4. SAJÁT KÉP HELYE -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell4.jpg" alt="Páros ásvány karkötő"> -->
@@ -1020,9 +1058,7 @@
                     </div>
                 </div>
 
-                <!-- ===============================================================
-                     5. SAJÁT KÉP HELYE (modell5.jpg)
-                     =============================================================== -->
+                <!-- 5. SAJÁT KÉP HELYE -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell5.jpg" alt="Egyedi kollekció"> -->
@@ -1034,13 +1070,66 @@
                         <p>Lágy pasztell kövek és homokszínű részletek találkozása.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- =================================================================
-         PLUSZ KIEGÉSZÍTÉS: HOGYAN MŰKÖDIK AZ NFC GYÖNGY?
+         6. ÚJ FUNKCIÓK SZEKCIÓ (DIGITÁLIS NÉVJEGYKÁRTYA ÉS OKOS LEHETŐSÉGEK)
+         ================================================================= -->
+    <section class="functions-section" id="funkciok">
+        <div class="section-header">
+            <span class="section-eyebrow">Okos Megoldások</span>
+            <h2 class="section-title">Funkciók</h2>
+            <p class="section-lead">
+                Minden Blanka's Beads ékszerbe rejtett NFC gyöngy személyre szabható. Válaszd ki, mit nyisson meg egyetlen érintés a telefonon.
+            </p>
+        </div>
+
+        <div class="functions-grid">
+            <!-- 1. FUNKCIÓ: DIGITÁLIS NÉVJEGYKÁRTYA -->
+            <div class="function-card">
+                <span class="function-number">01</span>
+                <h3>Digitális Névjegykártya</h3>
+                <p>Oszd meg elérhetőségeidet pillanatok alatt, papír névjegykártyák nélkül, egyetlen érintéssel a partner telefonján.</p>
+                <ul class="function-list">
+                    <li>Teljes név és titulus</li>
+                    <li>Telefonszám (azonnali mentéssel)</li>
+                    <li>E-mail cím</li>
+                    <li>Cím / Cégadatok</li>
+                </ul>
+            </div>
+
+            <!-- 2. FUNKCIÓ: KÖZÖSSÉGI & WEBES PROFIL -->
+            <div class="function-card">
+                <span class="function-number">02</span>
+                <h3>Közösségi Média & Portfólió</h3>
+                <p>Irányítsd az érdeklődőket közvetlenül a saját felületeidre vagy bemutatkozó oldaladra.</p>
+                <ul class="function-list">
+                    <li>Instagram / TikTok / LinkedIn profil</li>
+                    <li>Saját weboldal vagy webshop link</li>
+                    <li>Online időpontfoglaló felület</li>
+                    <li>Bármikor szabadon módosítható tartalom</li>
+                </ul>
+            </div>
+
+            <!-- 3. FUNKCIÓ: SZEMÉLYES EMLÉK & ÜZENET -->
+            <div class="function-card">
+                <span class="function-number">03</span>
+                <h3>Személyes Üzenet & Emlék</h3>
+                <p>Ajándékozz maradandó digitális meglepetést természetes ásványba zárva.</p>
+                <ul class="function-list">
+                    <li>Titkos szöveges vagy hangüzenet</li>
+                    <li>Közös fotóalbum vagy videó</li>
+                    <li>Kedvenc dal vagy lejátszási lista</li>
+                    <li>Vészhelyzeti elérhetőségi adatlap</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         DISZKRÉT NFC ÉLMÉNY SÁV
          ================================================================= -->
     <section>
         <div class="nfc-info-strip">
@@ -1050,11 +1139,11 @@
             </div>
             <div class="nfc-feature">
                 <h4>Rejtett NFC Technológia</h4>
-                <p>Érintsd a telefonodat a központi gyöngyhöz, és azonnal megnyílik a hozzá kapcsolt üzenet, fotó vagy zene.</p>
+                <p>Érintsd a telefonodat a központi gyöngyhöz, és azonnal megnyílik a hozzá kapcsolt névjegy, üzenet vagy oldal.</p>
             </div>
             <div class="nfc-feature">
                 <h4>Töltés Nélkül Működik</h4>
-                <p>Az NFC chip nem igényel akkumulátort vagy töltést – vízálló és örök életű emlék marad.</p>
+                <p>Az NFC chip nem igényel akkumulátort vagy töltést – vízálló és örök életű társ marad.</p>
             </div>
         </div>
     </section>
@@ -1063,18 +1152,16 @@
          LÁBLÉC (FOOTER)
          ================================================================= -->
     <footer>
-        <div class="footer-logo">B<span>B</span></div>
-        <p>Blancas Beads — Természetes ásványokból született, modern érintésre hangolt ékszerek.</p>
-        <div class="copyright">&copy; 2026 Blancas Beads. Minden jog fenntartva.</div>
+        <div class="footer-logo">BB</div>
+        <p>Blanka's Beads — Természetes ásványokból született, modern érintésre hangolt ékszerek.</p>
+        <div class="copyright">&copy; 2026 Blanka's Beads. Minden jog fenntartva.</div>
     </footer>
 
     <!-- =================================================================
-         JAVASCRIPT LOGIKA (MENÜ, INTERAKTÍV KARKÖTŐ ÉS GALÉRIA)
+         JAVASCRIPT LOGIKA
          ================================================================= -->
     <script>
-        /* -----------------------------------------
-           1. OLDALSÓ HAMBURGER MENÜ MŰKÖDÉSE
-           ----------------------------------------- */
+        /* 1. OLDALSÓ HAMBURGER MENÜ MŰKÖDÉSE */
         const openMenuBtn = document.getElementById('openMenuBtn');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const sidebarMenu = document.getElementById('sidebarMenu');
@@ -1096,9 +1183,7 @@
         sidebarOverlay.addEventListener('click', () => toggleMenu(false));
         menuLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-        /* -----------------------------------------
-           2. ÁSVÁNYGYÖNGYÖK ADATBÁZISA (VALÓSÁGHŰ TEXTÚRÁKKAL)
-           ----------------------------------------- */
+        /* 2. ÁSVÁNYGYÖNGYÖK ADATBÁZISA */
         const stones = [
             {
                 name: "Aventurin Zöld",
@@ -1144,12 +1229,10 @@
             }
         ];
 
-        /* -----------------------------------------
-           3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA ÉS VEZÉRLÉSE
-           ----------------------------------------- */
-        let centerStoneIndex = 0; // Kezdés: Aventurin Zöld az alsó főgyöngy
-        let outerStoneIndex = 1;  // Kezdés: Fehér Howlit a többi gyöngy
-        let currentStyle = 'full'; // 'full', 'spacer', 'strap'
+        /* 3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA */
+        let centerStoneIndex = 0;
+        let outerStoneIndex = 1;
+        let currentStyle = 'full';
 
         const braceletRing = document.getElementById('braceletRing');
         const centerStoneName = document.getElementById('centerStoneName');
@@ -1160,7 +1243,7 @@
 
         function renderInteractiveBracelet() {
             braceletRing.innerHTML = '';
-            const totalBeads = 18; // Összes gyöngy száma a körben
+            const totalBeads = 18;
             const radius = braceletRing.offsetWidth / 2;
             const centerX = radius;
             const centerY = radius;
@@ -1168,13 +1251,11 @@
             const centerStone = stones[centerStoneIndex];
             const outerStone = stones[outerStoneIndex];
 
-            // Feliratok frissítése
             centerStoneName.textContent = centerStone.name;
             centerStoneTrait.textContent = centerStone.trait;
             outerStoneName.textContent = outerStone.name;
             outerStoneTrait.textContent = outerStone.trait;
 
-            // Stílus osztályok kezelése
             braceletRing.classList.remove('strap-mode', 'spacer-mode');
             if (currentStyle === 'strap') {
                 braceletRing.classList.add('strap-mode');
@@ -1187,12 +1268,10 @@
             }
 
             for (let i = 0; i < totalBeads; i++) {
-                // Szög kiszámítása úgy, hogy az i = 0 pontosan ALUL KÖZÉPEN (90 fok / PI/2) legyen
                 const angle = (Math.PI / 2) + (i * (2 * Math.PI / totalBeads));
                 const x = centerX + radius * Math.cos(angle);
                 const y = centerY + radius * Math.sin(angle);
 
-                // Szíj karkötő módban csak az alsó főgyöngy és a két melletti gyöngy látszik
                 if (currentStyle === 'strap' && i !== 0 && i !== 1 && i !== totalBeads - 1) {
                     continue;
                 }
@@ -1201,11 +1280,9 @@
                 bead.classList.add('bead');
 
                 if (i === 0) {
-                    // Alsó középső kiemelt NFC gyöngy
                     bead.classList.add('center-bead');
                     bead.style.background = centerStone.gradient;
                 } else {
-                    // Többi gyöngy a karkötőben
                     const size = window.innerWidth <= 900 ? 25 : 29;
                     bead.style.width = `${size}px`;
                     bead.style.height = `${size}px`;
@@ -1216,7 +1293,6 @@
                 bead.style.top = `${y}px`;
                 braceletRing.appendChild(bead);
 
-                // Távtartó gyűrűk elhelyezése a főgyöngy két oldalán
                 if (i === 0) {
                     [-0.19, 0.19].forEach(offsetAngle => {
                         const spacer = document.createElement('div');
@@ -1232,7 +1308,6 @@
             }
         }
 
-        // Bal oldali nyilak: Alsó / középső főgyöngy léptetése
         document.getElementById('prevCenterBtn').addEventListener('click', () => {
             centerStoneIndex = (centerStoneIndex - 1 + stones.length) % stones.length;
             renderInteractiveBracelet();
@@ -1243,7 +1318,6 @@
             renderInteractiveBracelet();
         });
 
-        // Jobb oldali nyilak: Többi gyöngy léptetése egyszerre
         document.getElementById('prevOuterBtn').addEventListener('click', () => {
             outerStoneIndex = (outerStoneIndex - 1 + stones.length) % stones.length;
             renderInteractiveBracelet();
@@ -1254,7 +1328,6 @@
             renderInteractiveBracelet();
         });
 
-        // Karkötő típus gombok (Full gyöngy / Távtartó / Szíj)
         document.querySelectorAll('.style-pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.style-pill').forEach(b => b.classList.remove('active'));
@@ -1264,9 +1337,7 @@
             });
         });
 
-        /* -----------------------------------------
-           4. EGYSZÍNŰ KARKÖTŐK GALÉRIA GENERÁLÁSA
-           ----------------------------------------- */
+        /* 4. EGYSZÍNŰ KARKÖTŐK GALÉRIA GENERÁLÁSA */
         function renderSolidBracelets() {
             const solidTrack = document.getElementById('solidTrack');
             solidTrack.innerHTML = '';
@@ -1275,7 +1346,6 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
 
-                // Mini karkötő gyöngyeinek generálása
                 let miniBeadsHTML = '';
                 const count = 14;
                 const r = 52;
@@ -1312,9 +1382,7 @@
             });
         }
 
-        /* -----------------------------------------
-           5. VÍZSZINTES GALÉRIA NYILAK MŰKÖDÉSE
-           ----------------------------------------- */
+        /* 5. VÍZSZINTES GALÉRIA NYILAK MŰKÖDÉSE */
         function scrollTrack(trackId, distance) {
             const track = document.getElementById(trackId);
             track.scrollBy({
@@ -1323,7 +1391,6 @@
             });
         }
 
-        // Oldal betöltésekor és átméretezésekor kirajzoljuk a karkötőket
         window.addEventListener('DOMContentLoaded', () => {
             renderInteractiveBracelet();
             renderSolidBracelets();
