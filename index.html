@@ -231,11 +231,6 @@
             overflow: hidden;
         }
 
-        /* =========================================================================
-           [KÉP HELYE #0 - NYITÓ HÁTTÉRKÉP]
-           Ha a tengerparti tájkép helyett saját képet szeretnél, az alábbi
-           url('...') részben cseréld le a linket a saját képed nevére (pl. 'hatter.jpg')!
-           ========================================================================= */
         .hero-bg {
             position: absolute;
             inset: 0;
@@ -446,7 +441,6 @@
             transition: var(--transition);
         }
 
-        /* Gyöngy megjelenítése az eredeti gyöngyfotóiddal */
         .bead {
             position: absolute;
             border-radius: 50%;
@@ -482,7 +476,7 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.24);
         }
 
-        /* TÁVTARTÓ DÍSZEK (ARANY / EZÜST / KRISTÁLYOS) */
+        /* TÁVTARTÓ DÍSZEK */
         .spacer-ring {
             position: absolute;
             width: 8px;
@@ -687,7 +681,6 @@
             box-shadow: 0 14px 30px rgba(44, 42, 41, 0.06);
         }
 
-        /* Egységes, tiszta fehér képtároló lekerekített sarkokkal */
         .solid-photo-slot {
             width: 100%;
             height: 230px;
@@ -696,6 +689,7 @@
             border: 1px solid rgba(44, 42, 41, 0.06);
             margin-bottom: 18px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 16px;
@@ -716,9 +710,27 @@
             transform: scale(1.04);
         }
 
-        /* A fekete hátterű lazulit kép fehér háttérre igazítása */
         .solid-photo-slot img.invert-to-white {
             filter: invert(1) hue-rotate(180deg) contrast(1.05);
+        }
+
+        /* Elegáns tartalék jelzés, ha egy képfájl még nincs feltöltve a GitHubra */
+        .missing-file-note {
+            display: none;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding: 10px;
+        }
+
+        .missing-file-note code {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 7px;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            color: var(--text-dark);
+            font-size: 0.74rem;
         }
 
         .card-title {
@@ -962,7 +974,7 @@
 <body>
 
     <!-- =================================================================
-         1. FELSŐ ÁLLANDÓ SÁV (LETISZTULT BB LOGÓVAL ÉS HAMBURGER MENÜVEL)
+         1. FELSŐ ÁLLANDÓ SÁV
          ================================================================= -->
     <header>
         <button class="menu-btn" id="openMenuBtn" aria-label="Menü megnyitása">
@@ -998,7 +1010,7 @@
     </aside>
 
     <!-- =================================================================
-         2. HERO SZEKCIÓ (TENGERPARTI TÁJKÉP + BLANKA'S BEADS)
+         2. HERO SZEKCIÓ
          ================================================================= -->
     <section class="hero">
         <div class="hero-bg"></div>
@@ -1025,7 +1037,6 @@
         </div>
 
         <div class="customizer-workspace">
-            <!-- BAL OLDALI VEZÉRLŐ: ALSÓ / KÖZÉPSŐ NAGYOBB NFC GYÖNGY -->
             <div class="control-panel">
                 <span class="control-label">Kiemelt NFC Főgyöngy</span>
                 <div class="control-stone-name" id="centerStoneName">Zöld Aventurin</div>
@@ -1036,7 +1047,6 @@
                 </div>
             </div>
 
-            <!-- KÖZÉPSŐ VIZUÁLIS KARKÖTŐ -->
             <div class="bracelet-stage">
                 <div class="bracelet-ring" id="braceletRing"></div>
                 <div class="bracelet-center-info">
@@ -1046,7 +1056,6 @@
                 </div>
             </div>
 
-            <!-- JOBB OLDALI VEZÉRLŐ: ÖSSZES TÖBBI GYÖNGY -->
             <div class="control-panel">
                 <span class="control-label">Kísérő Ásványgyöngyök</span>
                 <div class="control-stone-name" id="outerStoneName">Howlit</div>
@@ -1058,9 +1067,7 @@
             </div>
         </div>
 
-        <!-- MÉRETÁLLÍTÁS ÉS TÁVTARTÓ DÍSZEK VARIÁLÁSA -->
         <div class="customizer-options-wrapper">
-            <!-- BAL DOBOZ: KARKÖTŐ MÉRETÁLLÍTÁS (15 - 22 CM) -->
             <div class="option-box">
                 <div class="option-sub-group">
                     <span class="option-title">Karkötő mérete (15–22 cm)</span>
@@ -1077,7 +1084,6 @@
                 </div>
             </div>
 
-            <!-- JOBB DOBOZ: TÁVTARTÓ DÍSZEK -->
             <div class="option-box">
                 <div class="option-sub-group">
                     <span class="option-title">Távtartó díszek száma (a gyöngyök között)</span>
@@ -1107,7 +1113,7 @@
     </section>
 
     <!-- =================================================================
-         4. EGYSZÍNŰ ÁSVÁNY KARKÖTŐK (MIND A 10 KÉSZ KARKÖTŐ FOTÓDDAL, FEHÉR HÁTTÉRREL)
+         4. EGYSZÍNŰ ÁSVÁNY KARKÖTŐK (OKOS KÉPKERESŐVEL ÉS FEHÉR HÁTTÉRREL)
          ================================================================= -->
     <section id="egyszinu-kollekcio">
         <div class="section-header">
@@ -1128,7 +1134,8 @@
                 <!-- 1. ZÖLD AVENTURIN -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="aventurine karkoto.jpg" alt="Zöld Aventurin karkötő">
+                        <img class="smart-bracelet-img" data-base="aventurine karkoto" src="aventurine karkoto.jpg" alt="Zöld Aventurin karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>aventurine karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Zöld Aventurin</h3>
                     <p class="card-subtitle">Nyugtató, lágy zöld ásvány, amely természetes frissességet sugároz.</p>
@@ -1138,7 +1145,8 @@
                 <!-- 2. RÓZSAKVARC -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="rozsakvarc karkoto.jpg" alt="Rózsakvarc karkötő">
+                        <img class="smart-bracelet-img" data-base="rozsakvarc karkoto" src="rozsakvarc karkoto.jpg" alt="Rózsakvarc karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>rozsakvarc karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Rózsakvarc</h3>
                     <p class="card-subtitle">Áttetsző, púderes rózsaszín kristály lágy, meleg ragyogással.</p>
@@ -1148,7 +1156,8 @@
                 <!-- 3. SÁRGA JÁDE -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="sarga jade karkoto.jpg" alt="Sárga Jáde karkötő">
+                        <img class="smart-bracelet-img" data-base="sarga jade karkoto" src="sarga jade karkoto.jpg" alt="Sárga Jáde karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>sarga jade karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Sárga Jáde</h3>
                     <p class="card-subtitle">Napfényes, meleg mézszínű ásvány vidám, életteli kisugárzással.</p>
@@ -1158,7 +1167,8 @@
                 <!-- 4. KARNEOL -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="karneol karkoto.jpg" alt="Karneol karkötő">
+                        <img class="smart-bracelet-img" data-base="karneol karkoto" src="karneol karkoto.jpg" alt="Karneol karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>karneol karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Karneol</h3>
                     <p class="card-subtitle">Mély, tüzes vöröses-narancs természetes kő határozott karakterrel.</p>
@@ -1168,7 +1178,8 @@
                 <!-- 5. ARANYHOMOKKŐ -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="aranyhomok karkoto.jpg" alt="Aranyhomokkő karkötő">
+                        <img class="smart-bracelet-img" data-base="aranyhomok karkoto" src="aranyhomok karkoto.jpg" alt="Aranyhomokkő karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>aranyhomok karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Aranyhomokkő</h3>
                     <p class="card-subtitle">Apró, csillogó rézszemcsékkel teli, meleg vörösesbarna kő.</p>
@@ -1178,7 +1189,8 @@
                 <!-- 6. OBSZIDIÁN -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="obszidian karkoto.jpg" alt="Obszidián karkötő">
+                        <img class="smart-bracelet-img" data-base="obszidian karkoto" src="obszidian karkoto.jpg" alt="Obszidián karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>obszidian karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Obszidián</h3>
                     <p class="card-subtitle">Tükörfényes, mélyfekete vulkáni üveg az időtlen elegancia jegyében.</p>
@@ -1188,7 +1200,8 @@
                 <!-- 7. HOWLIT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="howlit karkoto.jpg" alt="Howlit karkötő">
+                        <img class="smart-bracelet-img" data-base="howlit karkoto" src="howlit karkoto.jpg" alt="Howlit karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>howlit karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Howlit</h3>
                     <p class="card-subtitle">Hófehér ásvány finom, természetes szürke márványerezettel.</p>
@@ -1198,7 +1211,8 @@
                 <!-- 8. LÁVAKŐ -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="lavako karkoto.jpg" alt="Lávakő karkötő">
+                        <img class="smart-bracelet-img" data-base="lavako karkoto" src="lavako karkoto.jpg" alt="Lávakő karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>lavako karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Lávakő</h3>
                     <p class="card-subtitle">Matt, porózus felületű, karakteres fekete vulkanikus kőzet.</p>
@@ -1208,7 +1222,8 @@
                 <!-- 9. LAZULIT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="lazulit karkoto.jpg" alt="Lazulit karkötő" class="invert-to-white">
+                        <img class="smart-bracelet-img invert-to-white" data-base="lazulit karkoto" src="lazulit karkoto.jpg" alt="Lazulit karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>lazulit karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Lazulit</h3>
                     <p class="card-subtitle">Mély királykék ásvány természetes világos kristályzárványokkal.</p>
@@ -1218,7 +1233,8 @@
                 <!-- 10. AMETISZT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src="ametiszt karkoto.jpg" alt="Ametiszt karkötő">
+                        <img class="smart-bracelet-img" data-base="ametiszt karkoto" src="ametiszt karkoto.jpg" alt="Ametiszt karkötő">
+                        <div class="missing-file-note">Töltsd fel a GitHub repóba:<br><code>ametiszt karkoto.jpg</code></div>
                     </div>
                     <h3 class="card-title">Ametiszt</h3>
                     <p class="card-subtitle">Nemes, mélylila kvarckristály finom áttetsző rajzolattal.</p>
@@ -1247,14 +1263,8 @@
             </div>
 
             <div class="scroll-track" id="modelsTrack">
-                <!-- =====================================================================
-                     [KÉP HELYE #1 - TOVÁBBI MODELL 1. FOTÓ]
-                     Töröld ki a <div class="placeholder-icon"> és <div class="placeholder-text">
-                     sorokat, és vedd ki a kommentjelet az <img> elől/mögül!
-                     ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
-                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell1.jpg" alt="Távtartó díszes karkötő"> -->
                         <div class="placeholder-icon">+</div>
                         <div class="placeholder-text"><strong>Saját kép helye (#1)</strong><br>Fájlnév: <code>modell1.jpg</code></div>
                     </div>
@@ -1264,12 +1274,8 @@
                     </div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #2 - TOVÁBBI MODELL 2. FOTÓ]
-                     ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
-                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell2.jpg" alt="NFC Nyaklánc"> -->
                         <div class="placeholder-icon">+</div>
                         <div class="placeholder-text"><strong>Saját kép helye (#2)</strong><br>Fájlnév: <code>modell2.jpg</code></div>
                     </div>
@@ -1279,12 +1285,8 @@
                     </div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #3 - TOVÁBBI MODELL 3. FOTÓ]
-                     ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
-                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell3.jpg" alt="Páros ásvány karkötő"> -->
                         <div class="placeholder-icon">+</div>
                         <div class="placeholder-text"><strong>Saját kép helye (#3)</strong><br>Fájlnév: <code>modell3.jpg</code></div>
                     </div>
@@ -1294,12 +1296,8 @@
                     </div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #4 - TOVÁBBI MODELL 4. FOTÓ]
-                     ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
-                        <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell4.jpg" alt="Egyedi kollekció"> -->
                         <div class="placeholder-icon">+</div>
                         <div class="placeholder-text"><strong>Saját kép helye (#4)</strong><br>Fájlnév: <code>modell4.jpg</code></div>
                     </div>
@@ -1313,7 +1311,7 @@
     </section>
 
     <!-- =================================================================
-         6. FUNKCIÓK SZEKCIÓ (DIGITÁLIS NÉVJEGYKÁRTYA ÉS OKOS LEHETŐSÉGEK)
+         6. FUNKCIÓK SZEKCIÓ
          ================================================================= -->
     <section class="functions-section" id="funkciok">
         <div class="section-header">
@@ -1393,7 +1391,7 @@
     </footer>
 
     <!-- =================================================================
-         JAVASCRIPT LOGIKA (EREDETI GYÖNGYKÉPEKKEL ÉS KARNEOLRA ÁTÍRVA)
+         JAVASCRIPT LOGIKA
          ================================================================= -->
     <script>
         /* 1. OLDALSÓ HAMBURGER MENÜ MŰKÖDÉSE */
@@ -1418,7 +1416,41 @@
         sidebarOverlay.addEventListener('click', () => toggleMenu(false));
         menuLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-        /* 2. EREDETI GYÖNGYKÉPEK ADATBÁZISA (PIROS AVENTURIN -> KARNEOLRA ÁTÍRVA) */
+        /* 2. OKOS KÉPBETÖLTŐ AZ EGYSZÍNŰ KARKÖTŐKHÖZ
+           Automatikusan végigpróbálja a leggyakoribb kiterjesztés- és mappaváltozatokat! */
+        document.querySelectorAll('.smart-bracelet-img').forEach(img => {
+            const base = img.dataset.base; // pl. "aventurine karkoto"
+            const underscoreBase = base.replace(/\s+/g, '_');
+            const hyphenBase = base.replace(/\s+/g, '-');
+            const accentedBase = base.replace('karkoto', 'karkötő');
+
+            const candidates = [
+                `${base}.JPG`,
+                `${base}.jpeg`,
+                `${base}.png`,
+                `${accentedBase}.jpg`,
+                `${underscoreBase}.jpg`,
+                `${hyphenBase}.jpg`,
+                `images/${base}.jpg`,
+                `kepek/${base}.jpg`,
+                `img/${base}.jpg`
+            ];
+
+            let attempt = 0;
+            img.addEventListener('error', function onImgError() {
+                if (attempt < candidates.length) {
+                    img.src = candidates[attempt];
+                    attempt++;
+                } else {
+                    img.removeEventListener('error', onImgError);
+                    img.style.display = 'none';
+                    const note = img.parentElement.querySelector('.missing-file-note');
+                    if (note) note.style.display = 'block';
+                }
+            });
+        });
+
+        /* 3. EREDETI GYÖNGYKÉPEK ADATBÁZISA (KARNEOLRA ÁTÍRVA) */
         const stones = [
             {
                 name: "Zöld Aventurin",
@@ -1502,7 +1534,7 @@
             return bead;
         }
 
-        /* 3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA */
+        /* 4. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA */
         let centerStoneIndex = 0;   // Zöld Aventurin
         let outerStoneIndex = 6;    // Howlit
         let braceletSizeCm = 18;    // 15 - 22 cm
