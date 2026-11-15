@@ -427,7 +427,6 @@
             transform: scale(1.06);
         }
 
-        /* Középső karkötő megjelenítő vászon */
         .bracelet-stage {
             position: relative;
             width: 345px;
@@ -447,7 +446,7 @@
             transition: var(--transition);
         }
 
-        /* Gyöngy megjelenítése a te valódi gyöngyfotóiddal */
+        /* Gyöngy megjelenítése az eredeti gyöngyfotóiddal */
         .bead {
             position: absolute;
             border-radius: 50%;
@@ -455,7 +454,7 @@
             transform: translate(-50%, -50%);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
             transition: all 0.3s ease;
-            background-color: var(--bg-secondary);
+            background-color: var(--white);
             z-index: 4;
         }
 
@@ -478,16 +477,12 @@
             pointer-events: none;
         }
 
-        /* A kiemelt alsó NFC főgyöngy maradjon kicsit nagyobb, mint a többi */
         .bead.center-bead {
             z-index: 5;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.24);
         }
 
-        /* =========================================
-           TÁVTARTÓ DÍSZEK (ARANY / EZÜST / KRISTÁLYOS)
-           Kizárólag a gyöngyök közötti résben jelennek meg!
-           ========================================= */
+        /* TÁVTARTÓ DÍSZEK (ARANY / EZÜST / KRISTÁLYOS) */
         .spacer-ring {
             position: absolute;
             width: 8px;
@@ -499,19 +494,16 @@
             transition: all 0.25s ease;
         }
 
-        /* 1. Arany távtartó */
         .spacer-ring.spacer-gold {
             background: linear-gradient(180deg, #F8E8B8 0%, #C6A46C 48%, #8B6D3E 100%);
             border: 1px solid rgba(255, 255, 255, 0.45);
         }
 
-        /* 2. Ezüst távtartó */
         .spacer-ring.spacer-silver {
             background: linear-gradient(180deg, #FFFFFF 0%, #C8CCD1 48%, #7F848B 100%);
             border: 1px solid rgba(255, 255, 255, 0.65);
         }
 
-        /* 3. Kicsi kristályos távtartó (apró csillogó cirkónia szemekkel) */
         .spacer-ring.spacer-crystal {
             width: 9px;
             height: 28px;
@@ -555,7 +547,6 @@
             margin-top: 2px;
         }
 
-        /* Beállító panelek a tervező alatt (Méret + Távtartó variációk) */
         .customizer-options-wrapper {
             max-width: 1080px;
             margin: 26px auto 0;
@@ -639,7 +630,7 @@
         }
 
         /* =========================================
-           4. EGYSZÍNŰ KARKÖTŐK (CSAK A TE SAJÁT KÉPED HELYE, LEKEREKÍTVE)
+           4. EGYSZÍNŰ KARKÖTŐK (EGYSÉGES, TISZTA FEHÉR HÁTTERŰ KÁRTYÁK)
            ========================================= */
         .carousel-wrapper {
             position: relative;
@@ -696,16 +687,15 @@
             box-shadow: 0 14px 30px rgba(44, 42, 41, 0.06);
         }
 
-        /* Szépen lekerekített képtároló az egyszínű kész karkötők fotóinak */
+        /* Egységes, tiszta fehér képtároló lekerekített sarkokkal */
         .solid-photo-slot {
             width: 100%;
             height: 230px;
             border-radius: 16px;
-            background: linear-gradient(145deg, #F4EFE6, #FAF8F5);
-            border: 1px dashed rgba(184, 159, 125, 0.55);
+            background-color: #FFFFFF;
+            border: 1px solid rgba(44, 42, 41, 0.06);
             margin-bottom: 18px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 16px;
@@ -716,23 +706,19 @@
         .solid-photo-slot img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 14px;
+            object-fit: contain;
+            border-radius: 12px;
             display: block;
+            transition: transform 0.4s ease;
         }
 
-        .solid-slot-hint {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.5;
+        .product-card:hover .solid-photo-slot img {
+            transform: scale(1.04);
         }
 
-        .solid-slot-hint strong {
-            color: var(--accent-gold);
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 500;
-            font-size: 0.85rem;
+        /* A fekete hátterű lazulit kép fehér háttérre igazítása */
+        .solid-photo-slot img.invert-to-white {
+            filter: invert(1) hue-rotate(180deg) contrast(1.05);
         }
 
         .card-title {
@@ -783,7 +769,7 @@
         .photo-slot {
             width: 100%;
             height: 300px;
-            background: linear-gradient(145deg, #EAE3D7, #F7F4EE);
+            background-color: #FFFFFF;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -792,6 +778,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(44, 42, 41, 0.06);
         }
 
         .photo-slot img {
@@ -1090,7 +1077,7 @@
                 </div>
             </div>
 
-            <!-- JOBB DOBOZ: TÁVTARTÓ DÍSZEK (DARABSZÁM, HELY ÉS TÍPUS: ARANY / EZÜST / KRISTÁLYOS) -->
+            <!-- JOBB DOBOZ: TÁVTARTÓ DÍSZEK -->
             <div class="option-box">
                 <div class="option-sub-group">
                     <span class="option-title">Távtartó díszek száma (a gyöngyök között)</span>
@@ -1120,7 +1107,7 @@
     </section>
 
     <!-- =================================================================
-         4. EGYSZÍNŰ ÁSVÁNY KARKÖTŐK (MIND A 10 FAJTÁBÓL - CSAK A TE KÉPED HELYE)
+         4. EGYSZÍNŰ ÁSVÁNY KARKÖTŐK (MIND A 10 KÉSZ KARKÖTŐ FOTÓDDAL, FEHÉR HÁTTÉRREL)
          ================================================================= -->
     <section id="egyszinu-kollekcio">
         <div class="section-header">
@@ -1138,163 +1125,100 @@
             </div>
 
             <div class="scroll-track" id="solidTrack">
-                <!-- =====================================================================
-                     [KÉP HELYE #1 - ZÖLD AVENTURIN KARKÖTŐ FOTÓJA]
-                     Ha feltöltötted a képet a GitHubra (pl. kesz_zold_aventurin.jpg),
-                     töröld ki a <div class="solid-slot-hint">...</div> részt, és vedd ki
-                     a kommentjelet az <img> sor elől és mögül!
-                     ===================================================================== -->
+                <!-- 1. ZÖLD AVENTURIN -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <img src=kesz_zold_aventurin.web alt="Zöld Aventurin karkötő">
-                    
-                            <strong>+ Saját fotó helye (#1)</strong>
-                            Zöld Aventurin karkötő<br><code>kesz_zold_aventurine.web</code>
-                        
+                        <img src="aventurine karkoto.jpg" alt="Zöld Aventurin karkötő">
                     </div>
                     <h3 class="card-title">Zöld Aventurin</h3>
                     <p class="card-subtitle">Nyugtató, lágy zöld ásvány, amely természetes frissességet sugároz.</p>
                     <div class="card-badge">NFC &bull; Bőség &bull; Harmónia</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #2 - RÓZSAKVARC KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 2. RÓZSAKVARC -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_rozsakvarc.jpg" alt="Rózsakvarc karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#2)</strong>
-                            Rózsakvarc karkötő<br><code>kesz_rozsakvarc.jpg</code>
-                        </div>
+                        <img src="rozsakvarc karkoto.jpg" alt="Rózsakvarc karkötő">
                     </div>
                     <h3 class="card-title">Rózsakvarc</h3>
                     <p class="card-subtitle">Áttetsző, púderes rózsaszín kristály lágy, meleg ragyogással.</p>
                     <div class="card-badge">NFC &bull; Szeretet &bull; Gyengédség</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #3 - SÁRGA JÁDE KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 3. SÁRGA JÁDE -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_sarga_jade.jpg" alt="Sárga Jáde karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#3)</strong>
-                            Sárga Jáde karkötő<br><code>kesz_sarga_jade.jpg</code>
-                        </div>
+                        <img src="sarga jade karkoto.jpg" alt="Sárga Jáde karkötő">
                     </div>
                     <h3 class="card-title">Sárga Jáde</h3>
                     <p class="card-subtitle">Napfényes, meleg mézszínű ásvány vidám, életteli kisugárzással.</p>
                     <div class="card-badge">NFC &bull; Öröm &bull; Életerő</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #4 - PIROS AVENTURIN KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 4. KARNEOL -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_piros_aventurin.jpg" alt="Piros Aventurin karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#4)</strong>
-                            Piros Aventurin karkötő<br><code>kesz_piros_aventurin.jpg</code>
-                        </div>
+                        <img src="karneol karkoto.jpg" alt="Karneol karkötő">
                     </div>
-                    <h3 class="card-title">Piros Aventurin</h3>
-                    <p class="card-subtitle">Mély, terrakotta-vörös természetes kő határozott karakterrel.</p>
+                    <h3 class="card-title">Karneol</h3>
+                    <p class="card-subtitle">Mély, tüzes vöröses-narancs természetes kő határozott karakterrel.</p>
                     <div class="card-badge">NFC &bull; Lendület &bull; Önbizalom</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #5 - ARANYHOMOKKŐ KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 5. ARANYHOMOKKŐ -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_aranyhomokko.jpg" alt="Aranyhomokkő karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#5)</strong>
-                            Aranyhomokkő karkötő<br><code>kesz_aranyhomokko.jpg</code>
-                        </div>
+                        <img src="aranyhomok karkoto.jpg" alt="Aranyhomokkő karkötő">
                     </div>
                     <h3 class="card-title">Aranyhomokkő</h3>
                     <p class="card-subtitle">Apró, csillogó rézszemcsékkel teli, meleg vörösesbarna kő.</p>
                     <div class="card-badge">NFC &bull; Ambíció &bull; Ragyogás</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #6 - OBSZIDIÁN KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 6. OBSZIDIÁN -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_obszidian.jpg" alt="Obszidián karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#6)</strong>
-                            Obszidián karkötő<br><code>kesz_obszidian.jpg</code>
-                        </div>
+                        <img src="obszidian karkoto.jpg" alt="Obszidián karkötő">
                     </div>
                     <h3 class="card-title">Obszidián</h3>
                     <p class="card-subtitle">Tükörfényes, mélyfekete vulkáni üveg az időtlen elegancia jegyében.</p>
                     <div class="card-badge">NFC &bull; Erő &bull; Védelem</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #7 - HOWLIT KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 7. HOWLIT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_howlit.jpg" alt="Howlit karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#7)</strong>
-                            Howlit karkötő<br><code>kesz_howlit.jpg</code>
-                        </div>
+                        <img src="howlit karkoto.jpg" alt="Howlit karkötő">
                     </div>
                     <h3 class="card-title">Howlit</h3>
                     <p class="card-subtitle">Hófehér ásvány finom, természetes szürke márványerezettel.</p>
                     <div class="card-badge">NFC &bull; Nyugalom &bull; Tisztaság</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #8 - LÁVAKŐ KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 8. LÁVAKŐ -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_lavako.jpg" alt="Lávakő karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#8)</strong>
-                            Lávakő karkötő<br><code>kesz_lavako.jpg</code>
-                        </div>
+                        <img src="lavako karkoto.jpg" alt="Lávakő karkötő">
                     </div>
                     <h3 class="card-title">Lávakő</h3>
                     <p class="card-subtitle">Matt, porózus felületű, karakteres fekete vulkanikus kőzet.</p>
                     <div class="card-badge">NFC &bull; Stabilitás &bull; Földelés</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #9 - LAZULIT KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 9. LAZULIT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_lazulit.jpg" alt="Lazulit karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#9)</strong>
-                            Lazulit karkötő<br><code>kesz_lazulit.jpg</code>
-                        </div>
+                        <img src="lazulit karkoto.jpg" alt="Lazulit karkötő" class="invert-to-white">
                     </div>
                     <h3 class="card-title">Lazulit</h3>
                     <p class="card-subtitle">Mély királykék ásvány természetes világos kristályzárványokkal.</p>
                     <div class="card-badge">NFC &bull; Bölcsesség &bull; Tisztánlátás</div>
                 </div>
 
-                <!-- =====================================================================
-                     [KÉP HELYE #10 - AMETISZT KARKÖTŐ FOTÓJA]
-                     ===================================================================== -->
+                <!-- 10. AMETISZT -->
                 <div class="product-card">
                     <div class="solid-photo-slot">
-                        <!-- IDE SZÚRD BE A KÉPET: <img src="kesz_ametiszt.jpg" alt="Ametiszt karkötő"> -->
-                        <div class="solid-slot-hint">
-                            <strong>+ Saját fotó helye (#10)</strong>
-                            Ametiszt karkötő<br><code>kesz_ametiszt.jpg</code>
-                        </div>
+                        <img src="ametiszt karkoto.jpg" alt="Ametiszt karkötő">
                     </div>
                     <h3 class="card-title">Ametiszt</h3>
                     <p class="card-subtitle">Nemes, mélylila kvarckristály finom áttetsző rajzolattal.</p>
@@ -1324,7 +1248,7 @@
 
             <div class="scroll-track" id="modelsTrack">
                 <!-- =====================================================================
-                     [KÉP HELYE #11 - TOVÁBBI MODELL 1. FOTÓ]
+                     [KÉP HELYE #1 - TOVÁBBI MODELL 1. FOTÓ]
                      Töröld ki a <div class="placeholder-icon"> és <div class="placeholder-text">
                      sorokat, és vedd ki a kommentjelet az <img> elől/mögül!
                      ===================================================================== -->
@@ -1332,7 +1256,7 @@
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell1.jpg" alt="Távtartó díszes karkötő"> -->
                         <div class="placeholder-icon">+</div>
-                        <div class="placeholder-text"><strong>Kép helye (#11)</strong><br>Fájlnév: <code>modell1.jpg</code></div>
+                        <div class="placeholder-text"><strong>Saját kép helye (#1)</strong><br>Fájlnév: <code>modell1.jpg</code></div>
                     </div>
                     <div class="photo-card-body">
                         <h3>Távtartó Díszes Kiadás</h3>
@@ -1341,13 +1265,13 @@
                 </div>
 
                 <!-- =====================================================================
-                     [KÉP HELYE #12 - TOVÁBBI MODELL 2. FOTÓ]
+                     [KÉP HELYE #2 - TOVÁBBI MODELL 2. FOTÓ]
                      ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell2.jpg" alt="NFC Nyaklánc"> -->
                         <div class="placeholder-icon">+</div>
-                        <div class="placeholder-text"><strong>Kép helye (#12)</strong><br>Fájlnév: <code>modell2.jpg</code></div>
+                        <div class="placeholder-text"><strong>Saját kép helye (#2)</strong><br>Fájlnév: <code>modell2.jpg</code></div>
                     </div>
                     <div class="photo-card-body">
                         <h3>Blanka's NFC Nyaklánc</h3>
@@ -1356,13 +1280,13 @@
                 </div>
 
                 <!-- =====================================================================
-                     [KÉP HELYE #13 - TOVÁBBI MODELL 3. FOTÓ]
+                     [KÉP HELYE #3 - TOVÁBBI MODELL 3. FOTÓ]
                      ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell3.jpg" alt="Páros ásvány karkötő"> -->
                         <div class="placeholder-icon">+</div>
-                        <div class="placeholder-text"><strong>Kép helye (#13)</strong><br>Fájlnév: <code>modell3.jpg</code></div>
+                        <div class="placeholder-text"><strong>Saját kép helye (#3)</strong><br>Fájlnév: <code>modell3.jpg</code></div>
                     </div>
                     <div class="photo-card-body">
                         <h3>Páros Harmónia Szett</h3>
@@ -1371,13 +1295,13 @@
                 </div>
 
                 <!-- =====================================================================
-                     [KÉP HELYE #14 - TOVÁBBI MODELL 4. FOTÓ]
+                     [KÉP HELYE #4 - TOVÁBBI MODELL 4. FOTÓ]
                      ===================================================================== -->
                 <div class="photo-card">
                     <div class="photo-slot">
                         <!-- IDE SZÚRD BE A SAJÁT KÉPEDET: <img src="modell4.jpg" alt="Egyedi kollekció"> -->
                         <div class="placeholder-icon">+</div>
-                        <div class="placeholder-text"><strong>Kép helye (#14)</strong><br>Fájlnév: <code>modell4.jpg</code></div>
+                        <div class="placeholder-text"><strong>Saját kép helye (#4)</strong><br>Fájlnév: <code>modell4.jpg</code></div>
                     </div>
                     <div class="photo-card-body">
                         <h3>Limitált Tengerparti Széria</h3>
@@ -1469,7 +1393,7 @@
     </footer>
 
     <!-- =================================================================
-         JAVASCRIPT LOGIKA
+         JAVASCRIPT LOGIKA (EREDETI GYÖNGYKÉPEKKEL ÉS KARNEOLRA ÁTÍRVA)
          ================================================================= -->
     <script>
         /* 1. OLDALSÓ HAMBURGER MENÜ MŰKÖDÉSE */
@@ -1494,69 +1418,66 @@
         sidebarOverlay.addEventListener('click', () => toggleMenu(false));
         menuLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-        /* =========================================================================
-           [GYÖNGYKÉPEK HELYE - A TE ÁLTALAD ADOTT 10 DB GYÖNGYFOTÓ]
-           Mindegyik gyöngy a te saját fotódat használja.
-           ========================================================================= */
+        /* 2. EREDETI GYÖNGYKÉPEK ADATBÁZISA (PIROS AVENTURIN -> KARNEOLRA ÁTÍRVA) */
         const stones = [
             {
                 name: "Zöld Aventurin",
                 trait: "Bőség • Harmónia",
-                image: "zöld aventurine.jpg", /* <--- 1. GYÖNGYKÉP */
+                image: "zöld aventurine.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #8FC19A, #3E7B52 60%, #1F472C)"
             },
             {
                 name: "Rózsakvarc",
                 trait: "Szeretet • Gyengédség",
-                image: "rózsakvarc.jpg",      /* <--- 2. GYÖNGYKÉP */
+                image: "rózsakvarc.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #FCE4EC, #E8A5B8 60%, #B86E84)"
             },
             {
                 name: "Sárga Jáde",
                 trait: "Öröm • Életerő",
-                image: "sárga jade.jpg",      /* <--- 3. GYÖNGYKÉP */
+                image: "sárga jade.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #F5D08A, #D48C3B 60%, #8A5114)"
             },
             {
-                name: "Piros Aventurin",
+                name: "Karneol",
                 trait: "Lendület • Önbizalom",
-                image: "piros aventurin.jpg", /* <--- 4. GYÖNGYKÉP */
+                image: "piros aventurin.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #D97262, #9E2E20 60%, #57120A)"
             },
             {
                 name: "Aranyhomokkő",
                 trait: "Ambíció • Ragyogás",
-                image: "arany homokkő.jpg",   /* <--- 5. GYÖNGYKÉP */
+                image: "arany homokkő.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #C48A6E, #82472E 60%, #452011)"
             },
             {
                 name: "Obszidián",
                 trait: "Erő • Védelem",
-                image: "obszidián.jpg",       /* <--- 6. GYÖNGYKÉP */
+                image: "obszidián.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #5A5A5A, #1C1C1C 60%, #050505)"
             },
             {
                 name: "Howlit",
                 trait: "Nyugalom • Tisztaság",
-                image: "howlite.jpg",         /* <--- 7. GYÖNGYKÉP */
+                image: "howlite.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #FFFFFF, #EAE7E1 65%, #BEB9B0)"
             },
             {
                 name: "Lávakő",
                 trait: "Stabilitás • Földelés",
-                image: "lávakő.jpg",          /* <--- 8. GYÖNGYKÉP */
+                image: "lávakő.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #666666, #333333 60%, #141414)"
             },
             {
                 name: "Lazulit",
                 trait: "Bölcsesség • Tisztánlátás",
-                image: "lazulit.jpg",         /* <--- 9. GYÖNGYKÉP */
+                image: "lazulit.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #6C8CD5, #24428C 60%, #101F47)"
             },
             {
                 name: "Ametiszt",
                 trait: "Belső béke • Intuíció",
-                image: "ametiszt.jpg",        /* <--- 10. GYÖNGYKÉP */
+                image: "ametiszt.jpg",
                 fallbackGradient: "radial-gradient(circle at 30% 30%, #D1B3FF, #7644B8 60%, #3E1D6B)"
             }
         ];
@@ -1581,10 +1502,10 @@
             return bead;
         }
 
-        /* 3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA (MÉRETÁLLÍTÁSSAL + KÖZTES TÁVTARTÓKKAL) */
+        /* 3. INTERAKTÍV KARKÖTŐ KIRAJZOLÁSA */
         let centerStoneIndex = 0;   // Zöld Aventurin
         let outerStoneIndex = 6;    // Howlit
-        let braceletSizeCm = 18;    // 15 - 22 cm (minden cm = annyi db gyöngy a karkötőn)
+        let braceletSizeCm = 18;    // 15 - 22 cm
         let spacerCount = 0;        // 0, 2, 4, vagy 6 db távtartó
         let spacerPos = 'center';   // 'center', 'sides', 'even'
         let spacerMat = 'gold';     // 'gold', 'silver', 'crystal'
@@ -1597,16 +1518,11 @@
         const braceletStyleLabel = document.getElementById('braceletStyleLabel');
         const beadCountLabel = document.getElementById('beadCountLabel');
 
-        /* Garantáltan csak a gyöngyök közötti résbe (felezőszögre) helyezett távtartók */
         function getSpacerGapIndices(count, posMode, totalBeads) {
-            // A "gapIndex" g azt jelenti, hogy a távtartó a g-edik és (g+1)-edik gyöngy KÖZÖTT van!
-            // Mivel az i = 0 az alsó főgyöngy, a 0. rés a 0. és 1. gyöngy között van,
-            // a (totalBeads - 1). rés pedig az utolsó és a 0. gyöngy között van.
             const gaps = new Set();
             if (count === 0) return [];
 
             if (posMode === 'center') {
-                // Közvetlenül a főgyöngy két oldalán, majd szimmetrikusan kifelé a gyöngyök között
                 const pairs = count / 2;
                 for (let p = 0; p < pairs; p++) {
                     const rightGap = p % totalBeads;
@@ -1615,7 +1531,6 @@
                     gaps.add(leftGap);
                 }
             } else if (posMode === 'sides') {
-                // A bal és jobb oldali ív közepén lévő gyöngyök között
                 const rightMid = Math.floor(totalBeads * 0.25);
                 const leftMid = Math.floor(totalBeads * 0.75) - 1;
                 const pairs = count / 2;
@@ -1625,7 +1540,6 @@
                     gaps.add((leftMid - offset + totalBeads) % totalBeads);
                 }
             } else if (posMode === 'even') {
-                // Egyenletesen elosztva a gyöngyközökben a kör mentén
                 for (let k = 0; k < count; k++) {
                     const g = Math.round((k * totalBeads) / count) % totalBeads;
                     gaps.add(g);
@@ -1638,13 +1552,12 @@
         function renderInteractiveBracelet() {
             braceletRing.innerHTML = '';
 
-            // A gyöngyök száma követi a választott cm méretet (15 cm -> 15 gyöngy ... 22 cm -> 22 gyöngy)
             const totalBeads = braceletSizeCm;
             const radius = braceletRing.offsetWidth / 2;
             const centerX = radius;
             const centerY = radius;
             const stepAngle = (2 * Math.PI) / totalBeads;
-            const startAngle = Math.PI / 2; // Alsó-középső NFC főgyöngy pozíciója
+            const startAngle = Math.PI / 2;
 
             const centerStone = stones[centerStoneIndex];
             const outerStone = stones[outerStoneIndex];
@@ -1658,15 +1571,12 @@
             braceletStyleLabel.textContent = `${braceletSizeCm} cm • ${styleText}`;
             beadCountLabel.textContent = `${totalBeads} db valódi ásványgyöngy`;
 
-            // Gyöngyméret finom igazítása, hogy 15 és 22 gyöngynél is tökéletesen kiférjenek
             const isMobile = window.innerWidth <= 960;
             const baseOuterSize = isMobile ? 25 : 29;
             const sizeAdjust = Math.max(0, (totalBeads - 18) * 1.1);
             const outerSize = Math.round(baseOuterSize - sizeAdjust);
-            // A főgyöngy mindig arányosan nagyobb marad a kísérő gyöngyöknél
             const centerSize = outerSize + (isMobile ? 9 : 11);
 
-            // 1. Gyöngyök kirajzolása
             for (let i = 0; i < totalBeads; i++) {
                 const angle = startAngle + i * stepAngle;
                 const x = centerX + radius * Math.cos(angle);
@@ -1684,10 +1594,8 @@
                 braceletRing.appendChild(bead);
             }
 
-            // 2. Távtartók kirajzolása KIZÁRÓLAG két gyöngy közé (a felezőszögre!)
             const gapIndices = getSpacerGapIndices(spacerCount, spacerPos, totalBeads);
             gapIndices.forEach(gapIdx => {
-                // Pontosan a gapIdx-edik és (gapIdx + 1)-edik gyöngy félútján:
                 const midAngle = startAngle + (gapIdx + 0.5) * stepAngle;
                 const sx = centerX + radius * Math.cos(midAngle);
                 const sy = centerY + radius * Math.sin(midAngle);
@@ -1701,7 +1609,6 @@
             });
         }
 
-        // Bal oldali nyilak: Alsó / középső nagyobb NFC főgyöngy léptetése
         document.getElementById('prevCenterBtn').addEventListener('click', () => {
             centerStoneIndex = (centerStoneIndex - 1 + stones.length) % stones.length;
             renderInteractiveBracelet();
@@ -1712,7 +1619,6 @@
             renderInteractiveBracelet();
         });
 
-        // Jobb oldali nyilak: Kísérő gyöngyök léptetése
         document.getElementById('prevOuterBtn').addEventListener('click', () => {
             outerStoneIndex = (outerStoneIndex - 1 + stones.length) % stones.length;
             renderInteractiveBracelet();
@@ -1723,7 +1629,6 @@
             renderInteractiveBracelet();
         });
 
-        // Karkötő méretállítás (15 - 22 cm)
         const sizeButtons = document.querySelectorAll('#sizeGroup .style-pill');
         sizeButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1734,7 +1639,6 @@
             });
         });
 
-        // Távtartók darabszáma
         const countButtons = document.querySelectorAll('#spacerCountGroup .style-pill');
         const posButtons = document.querySelectorAll('#spacerPosGroup .style-pill');
         const matButtons = document.querySelectorAll('#spacerMaterialGroup .style-pill');
@@ -1753,7 +1657,6 @@
             });
         });
 
-        // Távtartók elhelyezése
         posButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.disabled) return;
@@ -1764,7 +1667,6 @@
             });
         });
 
-        // Távtartók stílusa (Arany / Ezüst / Kristályos)
         matButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.disabled) return;
